@@ -1,0 +1,20 @@
+name: Publish compbio to Docker Hub
+
+on:
+  push:
+    branches:
+      - compbio
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: haizizh/compbio
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          dockerfile: compbio/Dockerfile
+          default_branch: compbio
